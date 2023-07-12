@@ -116,7 +116,40 @@ To use Dense Embedding, specify `dense` as `config.retriever.type`.
 ### Faiss
 You can decide whether to use Faiss for retrieval by setting `config.retriever.faiss.use_faiss` to `True`. You can adjust the number of clusters created by IndexIVFScalarQuantizer using `config.retriever.faiss.num_clusters`, and the quantizer method used for indexing and distance calculation can be set using `config.retriever.faiss.metric`.
 
-## Test
+## 5️⃣ How to Run
+## Environment Setup
+```python
+$ bash install/install_requirements.sh
+```
+
+## Config
+In this template, all training and inference settings can be adjusted using the `config.yaml` file. You can specify the config file to use using `--config` or `-c` in the command line (default: `custom_config.yaml`).
+
+## Training
+### Retriever 
+Dense
+```
+python train_dpr.py -c base_config
+```
+
+### Reader 
+```
+python train.py -c base_config
+```
+In **train.py**, the MRC (Machine Reading Comprehension) reader is trained and validated (refer to **mrc.py** for MRC related details). <br>
+The pretrained model to be used as the reader can be specified using `config.model.name_or_path`. <br>
+`config.model.name_or_path` should contain the name of the model registered in the HuggingFace hub (e.g., nlpotato/roberta-base-e5) or the checkpoint path of a locally saved pretrained model (e.g., saved_models/nlpotato/roberta-base-e5/LWJ_12-23-22-11/checkpoint-9500). <br>
+
+The arguments required for the Trainer can be set in `config.train`, and optimizer-related settings can be adjusted using `config.optimizer`. <br>
+For detailed explanations of trainer settings, refer to the [HuggingFace official documentation](https://huggingface.co/docs/transformers/main_classes/trainer#transformers.TrainingArguments). <br>
+Tokenizer-related settings can be adjusted using `config.tokenizer`, and the tokenizer model is the same as the one specified in `config.model.name_or_path`. <br>
+
+The trained language model and tokenizer files will be saved in the path specified by `config.train.output_dir`. <br>
+If `output_dir` is not specified separately, an output folder named after the pretrained model used and the unique run_id indicating the start time of training will be created in "saved_models/model_name/run_id" for each training. <br>
+To resume training, specify the path of the folder where the trained trainer checkpoint is stored in `config.path.resume`. To upload the trained model and tokenizer to the HuggingFace Hub, set `config.hf_hb.push_to_hub` to `True` and specify the model name to be registered in `config.hf_hub.save_name`. <br>
+To share it on the Hub, run `huggingface-cli login` in the terminal to register your HuggingFace account information. <br>
+
+## Testing
 ```
 python inference.py -c base_config
 ```
