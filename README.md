@@ -116,9 +116,6 @@ To use Dense Embedding, specify `dense` as `config.retriever.type`.
 ### Faiss
 You can decide whether to use Faiss for retrieval by setting `config.retriever.faiss.use_faiss` to `True`. You can adjust the number of clusters created by IndexIVFScalarQuantizer using `config.retriever.faiss.num_clusters`, and the quantizer method used for indexing and distance calculation can be set using `config.retriever.faiss.metric`.
 
-## 5️⃣ How to Run
-## Environment Setup
-```
 ## Test
 ```
 python inference.py -c base_config
