@@ -1,6 +1,6 @@
 # Open-Domain Question Answering
 ## 1️⃣ Introduction
-This project handles the Open-Domain Question Answering (ODQA) task, which aims to answer questions based on world knowledge when no specific passage is given. The model consists of two stages: the "retriever" stage, which finds relevant documents related to the question, and the "reader" stage, which reads and identifies appropriate answers within the retrieved documents.
+This project handles the Open-Domain Question Answering (ODQA) task, which aims to answer questions based on world knowledge when no specific passage is given. <br> The model consists of two stages: the "retriever" stage, which finds relevant documents related to the question, and the "reader" stage, which reads and identifies appropriate answers within the retrieved documents.
 <p align="center"><img src="https://user-images.githubusercontent.com/65378914/217729308-057c696b-6c1f-41eb-970e-14ea6281c67c.png" width="80%" height="80%"/></p>
  - Evaluation metrics: Exact Match (EM), F1 Score <br>
 <details>
